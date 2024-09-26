@@ -25,6 +25,15 @@ _This course is also available on my [website](https://karanpratapsingh.com/cour
   - [Availability](#availability)
   - [Scalability](#scalability)
   - [Storage](#storage)
+  - [Proxy Server](https://www.fortinet.com/resources/cyberglossary/proxy-server)
+  - [Message Queues](https://blog.algomaster.io/p/message-queues)
+  - [Checksums](https://blog.algomaster.io/p/what-are-checksums)
+  - [WebSockets](https://blog.algomaster.io/p/websockets)
+  - [Bloom Filters](https://www.enjoyalgorithms.com/blog/bloom-filter)
+  - [API Gateway](https://www.nginx.com/learn/api-gateway/)
+  - [Microservices Guidelines](https://newsletter.systemdesign.one/p/netflix-microservices)
+  - [Latency numbers every programmer should know](https://static.googleusercontent.com/media/sre.google/en//static/pdf/rule-of-thumb-latency-numbers-letter.pdf)
+  
 
 - **Chapter II**
 
@@ -43,6 +52,14 @@ _This course is also available on my [website](https://karanpratapsingh.com/cour
   - [Sharding](#sharding)
   - [Consistent Hashing](#consistent-hashing)
   - [Database Federation](#database-federation)
+  - [Database Architectures](https://www.mongodb.com/developer/products/mongodb/active-active-application-architectures/)
+  - [Failover](https://avinetworks.com/glossary/failover/)
+  - [Idempotency](https://blog.algomaster.io/p/ff43e079-98db-428d-83f7-fd34697df678)
+  - [Database Scaling](https://blog.algomaster.io/p/system-design-how-to-scale-a-database)
+  - [Data Replication](https://redis.com/blog/what-is-data-replication/)
+  - [Data Redundancy](https://blog.algomaster.io/p/489440f1-9c80-4241-9ec8-de156964c3b9)
+  - [Database Sharding](https://blog.algomaster.io/p/what-is-database-sharding)
+  - [Distributed Locking](https://martin.kleppmann.com/2016/02/08/how-to-do-distributed-locking.html)
 
 - **Chapter III**
 
@@ -73,7 +90,31 @@ _This course is also available on my [website](https://karanpratapsingh.com/cour
   - [SSL, TLS, mTLS](#ssl-tls-mtls)
 
 - **Chapter V**
+  - System Design Tradeoffs
+  - [Top 15 Tradeoffs](https://blog.algomaster.io/p/system-design-top-15-trade-offs)
+  - [Vertical vs Horizontal Scaling](https://blog.algomaster.io/p/system-design-vertical-vs-horizontal-scaling)
+  - [Stateful vs Stateless Design](https://blog.algomaster.io/p/741dff8e-10ea-413e-8dd2-be57434917d2)
+  - [Strong vs Eventual Consistency](https://blog.algomaster.io/p/7d9da525-fe25-4e16-94e8-8056e7c57934)
+  - [Read-Through vs Write-Through Cache](https://blog.algomaster.io/p/59cae60d-9717-4e20-a59e-759e370db4e5)
+  - [Push vs Pull Architecture](https://blog.algomaster.io/p/af5fe2fe-9a4f-4708-af43-184945a243af)
+  - [Long-polling vs WebSockets](https://blog.algomaster.io/p/60bfcee4-8ac5-4500-a557-a04c8cbcaf48)
+  - [REST vs RPC](https://blog.algomaster.io/p/106604fb-b746-41de-88fb-60e932b2ff68)
+  - [Latency vs Throughput](https://aws.amazon.com/compare/the-difference-between-throughput-and-latency/)
+  - [Synchronous vs. asynchronous communications](https://blog.algomaster.io/p/aec1cebf-6060-45a7-8e00-47364ca70761)
+  - [Batch Processing vs Stream Processing](https://blog.algomaster.io/p/d9442268-03d8-4f55-a103-7a3d4fb54661) 
 
+- **Chapter VI**
+  - System Design Architectural Patterns
+  - [Client-Server Architecture](https://blog.algomaster.io/p/4585cf8e-30a4-4295-936f-308a25cb716c)
+  - [Microservices Architecture](https://medium.com/hashmapinc/the-what-why-and-how-of-a-microservices-architecture-4179579423a9)
+  - [Serverless Architecture](https://blog.algomaster.io/p/2edeb23b-cfa5-4b24-845e-3f6f7a39d162)
+  - [Event-Driven Architecture](https://www.confluent.io/learn/event-driven-architecture/)
+  - [Peer-to-Peer (P2P) Architecture](https://www.spiceworks.com/tech/networking/articles/what-is-peer-to-peer/)
+  - [Consistency Patterns](https://systemdesign.one/consistency-patterns/)
+  - [HeartBeats](https://blog.algomaster.io/p/heartbeats-in-distributed-systems)
+  - [Circuit Breaker](https://medium.com/geekculture/design-patterns-for-microservices-circuit-breaker-pattern-276249ffab33)
+
+- **Chapter VI**
   - [System Design Interviews](#system-design-interviews)
   - [URL Shortener](#url-shortener)
   - [WhatsApp](#whatsapp)
@@ -81,8 +122,13 @@ _This course is also available on my [website](https://karanpratapsingh.com/cour
   - [Netflix](#netflix)
   - [Uber](#uber)
 
+
+ 
 - **Appendix**
 
+  - [system-design-101](https://github.com/hungrydevops/system-design-101)
+  - [System-Design-Primer](https://github.com/hungrydevops/system-design-primer)
+  - [Awesome-System-Design-Resources](https://github.com/hungrydevops/awesome-system-design-resources)
   - [Next Steps](#next-steps)
   - [References](#references)
 
@@ -109,7 +155,7 @@ also makes it easier to reason about and manage architectural changes as the sys
 
 The system design interview is an **open-ended conversation**.  You are expected to lead it.
 
-You can use the following steps to guide the discussion.  To help solidify this process, work through the [System design interview questions with solutions](#system-design-interview-questions-with-solutions) section using the following steps.
+You can use the following steps to guide the discussion. 
 
 ### Step 1: Outline use cases, constraints, and assumptions
 
@@ -133,10 +179,9 @@ Outline a high level design with all important components.
 
 ### Step 3: Design core components
 
-Dive into details for each core component.  For example, if you were asked to [design a url shortening service](solutions/system_design/pastebin/README.md), discuss:
+Dive into details for each core component.  For example, if you were asked to design a url shortening service., discuss:
 
 * Generating and storing a hash of the full url
-    * [MD5](solutions/system_design/pastebin/README.md) and [Base62](solutions/system_design/pastebin/README.md)
     * Hash collisions
     * SQL or NoSQL
     * Database schema
@@ -153,15 +198,15 @@ Identify and address bottlenecks, given the constraints.  For example, do you ne
 * Caching
 * Database sharding
 
-Discuss potential solutions and trade-offs.  Everything is a trade-off.  Address bottlenecks using [principles of scalable system design](#index-of-system-design-topics).
+Discuss potential solutions and trade-offs.  Everything is a trade-off.  Address bottlenecks using principles of scalable system design.
 
 ### Back-of-the-envelope calculations
 
 You might be asked to do some estimates by hand.  Refer to the [Appendix](#appendix) for the following resources:
 
 * [Use back of the envelope calculations](http://highscalability.com/blog/2011/1/26/google-pro-tip-use-back-of-the-envelope-calculations-to-choo.html)
-* [Powers of two table](#powers-of-two-table)
-* [Latency numbers every programmer should know](#latency-numbers-every-programmer-should-know)
+* Powers of two table.
+* [Latency numbers every programmer should know](https://static.googleusercontent.com/media/sre.google/en//static/pdf/rule-of-thumb-latency-numbers-letter.pdf)
 
 ### Source(s) and further reading
 
