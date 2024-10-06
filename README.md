@@ -121,8 +121,7 @@ _This course is also available on my [website](https://karanpratapsingh.com/cour
   - [Twitter](#twitter)
   - [Netflix](#netflix)
   - [Uber](#uber)
-
-
+  - Design an auto-scale system running on EKS/k8s(#Design).
  
 - **Appendix**
 
@@ -5762,9 +5761,66 @@ To make our system more resilient we can do the following:
 - Multiple instances and replicas for our distributed cache.
 - Exactly once delivery and message ordering is challenging in a distributed system, we can use a dedicated [message broker](https://karanpratapsingh.com/courses/system-design/message-brokers) such as [Apache Kafka](https://kafka.apache.org) or [NATS](https://nats.io) to make our notification system more robust.
 
-# Next Steps
+# Design a system with auto-scaling running on EKS/K8s.
 
-Congratulations, you've finished the course!
+- 1. Problem Understanding
+- The task is to design a Kubernetes-based system on AWS (EKS) that can automatically scale based on fluctuating real-time traffic. The solution should ensure optimal resource utilization, cost-efficiency, and high availability while handling variable traffic.
+
+- 2. Key Components in EKS Architecture
+- Frontend Layer
+- CloudFront with S3: Serve static assets (like HTML, JS, CSS) using Amazon S3 and use Amazon CloudFront for faster content delivery with caching.
+- Amazon API Gateway: Handle API requests and route them to the backend services running on EKS.
+
+- 3. Compute Layer on EKS
+- Cluster Design
+- EKS Cluster: The application runs inside containers managed by Kubernetes in EKS. Pods are the smallest units of deployment inside EKS clusters.
+- Load Balancing: Kubernetes Ingress with ALB: Use AWS Application Load Balancer (ALB) as the ingress controller to route traffic to your EKS cluster. The ALB distributes incoming traffic evenly to various pods running your application, ensuring balanced load distribution.
+- Horizontal Pod Autoscaling (HPA) : HPA is a native Kubernetes component that scales the number of pods in your EKS cluster based on real-time metrics like CPU or memory usage, request count, or custom metrics.
+- Triggering Scaling: Define scaling policies based on CPU utilization or other application-specific metrics (e.g., memory usage or number of requests).
+Example: HPA can automatically add more pods when CPU utilization exceeds 70%.
+- Custom Metrics: Use Kubernetes Metrics Server or Prometheus with the Prometheus Adapter to monitor additional metrics, such as latency or request rate, and trigger scaling based on those metrics.
+```
+apiVersion: autoscaling/v2beta2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: my-app-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: my-app
+  minReplicas: 2
+  maxReplicas: 20
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 70
+```
+### Cluster Autoscaler
+- Kubernetes Cluster Autoscaler: This service automatically adjusts the number of worker nodes in the EKS cluster based on the resource requirements of the pods. It works with your Auto Scaling Group (ASG) at the EC2 layer.
+- If a pod cannot be scheduled due to lack of resources, the Cluster Autoscaler adds new EC2 instances (nodes) to the cluster.
+- When traffic decreases and resources are no longer needed, it removes nodes, reducing costs.
+### Key Metrics to monitor:
+- Pending Pods: If pods are pending due to insufficient resources, Cluster Autoscaler adds more nodes to handle them.
+- Node Utilization: When node utilization drops below a threshold (e.g., <30%), Cluster Autoscaler removes nodes to optimize resource usage and reduce costs.
+### Auto Scaling Group (ASG) for EKS Nodes
+- EKS uses an Auto Scaling Group (ASG) for worker nodes (EC2 instances). The ASG can scale the number of nodes based on CloudWatch metrics, such as CPU utilization or memory usage, in combination with Cluster Autoscaler.
+- 4. Scaling the Backend Services - Database Layer
+- Amazon RDS (Aurora): For relational databases, Aurora auto-scales read replicas to handle increased traffic.
+- Amazon DynamoDB: For NoSQL databases, use DynamoDB Auto Scaling to adjust read/write capacity units based on traffic patterns.
+- Caching Layer: ElastiCache (Redis/Memcached): Cache frequent queries and reduce the load on your database. This reduces response time and prevents traffic spikes from overloading your backend.
+- Observability and Monitoring : Prometheus and Grafana: Use Prometheus for collecting metrics from your EKS cluster and Grafana for visualizing them. You can monitor CPU, memory, and custom application metrics.
+- AWS CloudWatch Container Insights: Use CloudWatch to monitor the performance of your EKS clusters, including CPU, memory, and network metrics.
+- Alerts: Set up CloudWatch Alarms and Prometheus alerts to trigger notifications when traffic spikes or when resource usage exceeds thresholds.
+- Cost Optimization - Spot Instances: To reduce costs, you can run part of your worker nodes on EC2 Spot Instances in the ASG, allowing Kubernetes to take advantage of cost-efficient spare EC2 capacity.
+- Fault Tolerance and High Availability - Multi-AZ Deployment: Distribute EKS worker nodes across multiple Availability Zones (AZs) to ensure high availability.
+- Self-Healing: EKS automatically replaces failed pods and reschedules them on healthy nodes. If a node fails, the application continues running with minimal downtime.
+- Conclusion - For a system running on EKS, real-time auto-scaling is achieved through a combination of Horizontal Pod Autoscaling (HPA) for scaling pods, Cluster Autoscaler for dynamically scaling EC2 instances (nodes), and AWS Auto Scaling Groups. This ensures that both the application and the underlying infrastructure scale in response to real-time traffic, optimizing both performance and cost.
+
+# Next Steps
 
 Now that you know the fundamentals of System Design, here are some additional resources:
 
