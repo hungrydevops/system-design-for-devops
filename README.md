@@ -121,7 +121,7 @@ _This course is also available on my [website](https://karanpratapsingh.com/cour
   - [Twitter](#twitter)
   - [Netflix](#netflix)
   - [Uber](#uber)
-  - Design an auto-scale system running on EKS/k8s(#Design).
+  - [Design an auto-scale system running on EKS/k8s](#Design).
  
 - **Appendix**
 
