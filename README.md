@@ -121,7 +121,7 @@ _This course is also available on my [website](https://karanpratapsingh.com/cour
   - [Twitter](#twitter)
   - [Netflix](#netflix)
   - [Uber](#uber)
-  - [Design an auto-scale system running on EKS/k8s](#auto-scale).
+  - [Design an auto-scale system running on EKS/k8s](#eks).
  
 - **Appendix**
 
@@ -5762,7 +5762,7 @@ To make our system more resilient we can do the following:
 - Exactly once delivery and message ordering is challenging in a distributed system, we can use a dedicated [message broker](https://karanpratapsingh.com/courses/system-design/message-brokers) such as [Apache Kafka](https://kafka.apache.org) or [NATS](https://nats.io) to make our notification system more robust.
 
 # auto-scaling system running on EKS/K8s.
-
+# eks
 - 1. Problem Understanding
 - The task is to design a Kubernetes-based system on AWS (EKS) that can automatically scale based on fluctuating real-time traffic. The solution should ensure optimal resource utilization, cost-efficiency, and high availability while handling variable traffic.
 
